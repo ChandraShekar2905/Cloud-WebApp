@@ -67,16 +67,16 @@ Cloud-WebApp/
 - Commands to test the API
   
   - Basic health check request (GET Request)
-    - 'curl -i http://127.0.0.1:8080/healthz 
+    - curl -i http://127.0.0.1:8080/healthz 
 
   - health check request with Body
-    - 'curl -i -X GET http://127.0.0.1:8080/healthz -d '{"test":"data"} -H "Content-Type: application/json" 
+    - curl -i -X GET http://127.0.0.1:8080/healthz -d '{"test":"data"} -H "Content-Type: application/json" 
 
   - Making a GET request when the Database is down ( First stop the PostgreSQL service)
-    - 'curl -i http://127.0.0.1:8080/healthz
+    - curl -i http://127.0.0.1:8080/healthz
 
   - Testing the unsupported methods
-    - 'curl -i -X POST http://127.0.0.1:8080/healthz  
+    - curl -i -X POST http://127.0.0.1:8080/healthz  
 
 
 
