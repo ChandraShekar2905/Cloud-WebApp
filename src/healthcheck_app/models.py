@@ -1,4 +1,4 @@
-from  database import Base
+from database import Base
 from sqlalchemy.dialects.postgresql import TIMESTAMP
 from sqlalchemy import BigInteger, Column, Index, text
 from sqlalchemy.orm import Mapped, mapped_column 
