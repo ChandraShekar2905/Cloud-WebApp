@@ -52,12 +52,13 @@ Cloud-WebApp/
 - Create the database for health checks(healthz-db) using the commands "CREATE DATABSE healthz_db;
 - CREATE USER <username> WITH PASSWORD <password>;
 - GRANT ALL PRIVILAGES ON DATABASE healthz_db TO <username>
-- copy the DATABASEURL into the .env file
+- create a .env file in the healthcheck_app directoryand copy the DATABASEURL into the .env file
  
+- Make sure the PostgreSQL service is running( if not start it by using 'brew services start postgresql@17)
 
 - Run the Alembic migration by "alembic upgrade head"
 
-- Start the app using the command 'univorn main:app --reload --port 8080'
+- Start the app using the command 'uvicorn main:app --reload --port 8080'
 
 
 
