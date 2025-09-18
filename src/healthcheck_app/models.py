@@ -1,4 +1,4 @@
-from .database import Base
+from  database import Base
 from sqlalchemy.dialects.postgresql import TIMESTAMP
 from sqlalchemy import BigInteger, Column, Index, text
 from sqlalchemy.orm import Mapped, mapped_column 
@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 #This Class defines the table structure and models the data to be accepted by the health_checks table
 class HealthCheck(Base):
-    tablename = "health_checks"
+    __tablename__ = "health_checks"
     
     check_id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True) #This is the unique id for the records in the table
     
