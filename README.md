@@ -49,7 +49,11 @@ Cloud-WebApp/
 
 - Install the dependencies using " pip3 install -r requirements.txt "
 
-- Create the database for health checks(healthz-db) and copy the DATABASEURL into the .env file
+- Create the database for health checks(healthz-db) using the commands "CREATE DATABSE healthz_db;
+- CREATE USER <username> WITH PASSWORD <password>;
+- GRANT ALL PRIVILAGES ON DATABASE healthz_db TO <username>
+- copy the DATABASEURL into the .env file
+ 
 
 - Run the Alembic migration by "alembic upgrade head"
 
