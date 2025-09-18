@@ -1,3 +1,4 @@
+import os,sys
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -5,6 +6,17 @@ from sqlalchemy import pool
 
 from alembic import context
 
+# Getting the path of the current and root directories here 
+HERE = os.path.abspath(os.path.dirname(__file__))
+PKG_DIR = os.path.abspath(os.path.join(HERE, os.pardir))
+
+#Adding the root directory to system path inorder to import the models
+if PKG_DIR not in sys.path:
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(os.path.joins(PKG_DIR, ".env"))
+    except Exception:
+        pass
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -18,12 +30,18 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+import models
+target_metadata = models.Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+#configuring the database to allow the connection
+database_url = os.getenv("DATABASE_URL")
+if database_url:
+    config.set_main_option("sqlalchemy.url", database_url) 
 
 
 def run_migrations_offline() -> None:
