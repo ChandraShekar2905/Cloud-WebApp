@@ -1,0 +1,7 @@
+fastapi  #For creating API end points
+uvicorn  #Server
+sqlalchemy # For interacting with the database 
+psycopg2-binary # Used to connect with the database
+alembic # For Database schema management,migrations and version control
+pydantic # It is used for data validation
+python-dotenv # Used for managing the env file
