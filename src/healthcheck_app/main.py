@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Request, Depends, status
 from fastapi.responses import Response
 from sqlalchemy.exc import OperationalError, SQLAlchemyError
-from sqlalchemy.orm import Session
 
 from database import SessionLocal, engine, Base
 from models import HealthCheck
@@ -26,6 +25,9 @@ CACHE_HEADERS = {
     "X-Content-Type-Options": "nosniff",
 }
 
+def empty_response(code: int) -> Response:
+    return Response(status_code=code, headers=CACHE_HEADERS)
+
 #Creating the API endpoint which accepts GET request and checks the database connection
 #Also Shows the Error when the database is down/not running
 @app.get("/healthz")
@@ -48,3 +50,11 @@ def healthz(request: Request):
     except (OperationalError, SQLAlchemyError):
         #We will return the Service Unavailable status when the database is not running or has errors
         return Response(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, headers=CACHE_HEADERS)
+
+#We Return an Empty Response with 405 status code    
+@app.post("/healthz")
+@app.put("/healthz")
+@app.patch("/healthz")
+@app.delete("/healthz")
+def healthz_not_allowed() -> Response:
+    return empty_response(status.HTTP_405_METHOD_NOT_ALLOWED)
