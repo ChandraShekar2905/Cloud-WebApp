@@ -2,7 +2,6 @@ from fastapi import FastAPI, Request, Depends, status
 from fastapi.responses import Response
 from sqlalchemy.exc import OperationalError, SQLAlchemyError
 from sqlalchemy.orm import Session
-
 from database import SessionLocal, engine, Base
 from models import HealthCheck
 
@@ -69,6 +68,7 @@ async def healthz(request: Request, db: Session = Depends(get_db)) -> Response:
 def healthz_not_allowed() -> Response:
     return empty_response(status.HTTP_405_METHOD_NOT_ALLOWED)
 
+#Here we override the default handling of meta-HTTP methods 
 @app.api_route("/healthz", methods=["HEAD","OPTIONS","TRACE"])
 def healthz_not_allowed_meta() -> Response:
     return empty_response(status.HTTP_405_METHOD_NOT_ALLOWED)
